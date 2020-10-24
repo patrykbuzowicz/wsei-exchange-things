@@ -1,0 +1,25 @@
+﻿@model ItemModel
+
+<h2>Add new item</h2>
+
+<form method="POST">
+    <div class="form-group">
+        <label asp-for="Name">Item name</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+
+    <div class="form-check">
+        <input asp-for="IsVisible" class="form-check-input" />
+        <label asp-for="IsVisible" class="form-check-label">Item visible?</label>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Add new item" />
+    </div>
+
+</form>
