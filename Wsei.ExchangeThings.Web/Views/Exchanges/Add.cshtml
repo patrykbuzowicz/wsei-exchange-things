@@ -2,6 +2,8 @@
 
 <h2>Add new item</h2>
 
+<div id="success-alert" class="alert alert-success" style="display: none">Item added successfully</div>
+
 <form method="POST">
     <div class="form-group">
         <label asp-for="Name">Item name</label>
@@ -23,3 +25,7 @@
     </div>
 
 </form>
+
+@section Scripts {
+    <script src="~/js/addNewItem.js"></script>
+}
