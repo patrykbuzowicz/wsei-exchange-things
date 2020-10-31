@@ -29,7 +29,14 @@ namespace Wsei.ExchangeThings.Web.Controllers
                 Name = item.Name,
             };
 
-            return View("AddConfirmation", viewModel);
+            //return View("AddConfirmation", viewModel);
+            return RedirectToAction("AddConfirmation", new { itemId = 1 });
+        }
+
+        [HttpGet]
+        public IActionResult AddConfirmation(int itemId)
+        {
+            return View(itemId);
         }
     }
 }
