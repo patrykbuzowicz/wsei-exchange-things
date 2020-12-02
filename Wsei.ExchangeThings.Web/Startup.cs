@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Wsei.ExchangeThings.Web.Database;
 using Wsei.ExchangeThings.Web.Filters;
+using Wsei.ExchangeThings.Web.Models;
+using Wsei.ExchangeThings.Web.Models.Validation;
 
 namespace Wsei.ExchangeThings.Web
 {
@@ -23,7 +27,9 @@ namespace Wsei.ExchangeThings.Web
             services.AddControllersWithViews(config =>
             {
                 config.Filters.Add<MyCustomActionFilter>();
-            });
+            }).AddFluentValidation();
+
+            services.AddTransient<IValidator<ItemModel>, ItemModelValidator>();
 
             services.AddDbContext<ExchangesDbContext>(options => options
                 .UseSqlServer(Configuration.GetConnectionString("ExchangeThings"))
@@ -42,6 +48,7 @@ namespace Wsei.ExchangeThings.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
             app.UseStaticFiles();
 
             app.UseRouting();
