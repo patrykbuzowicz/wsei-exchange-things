@@ -1,1 +1,39 @@
-﻿<h2>Hi man, this is my new app</h2>
+﻿@model IEnumerable<ItemEntity>
+
+<h2>Current items</h2>
+
+<div>
+    <div class="float-left">
+        <a asp-action="Add">Add new</a>
+    </div>
+    <div class="float-right mb-3">
+        <form method="get">
+            <div class="input-group">
+                <input type="text" name="query" class="form-control" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-secondary">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Visible</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@(item.IsVisible ? "yes" : "no")</td>
+            </tr>
+        }
+    </tbody>
+</table>

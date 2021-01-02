@@ -1,0 +1,20 @@
+﻿@model LoginModel
+
+@if (ViewBag.Failed == true)
+{
+    <div class="alert alert-danger">Authentication failed</div>
+}
+
+<form method="post">
+    <div class="form-group form-inline">
+        <label asp-for="Username">Username:</label>
+        <input asp-for="Username" class="form-control"/>
+    </div>
+
+    <div class="form-group form-inline">
+        <label asp-for="Password">Password:</label>
+        <input asp-for="Password" class="form-control"/>
+    </div>
+
+    <input type="submit" value="Login" />
+</form>

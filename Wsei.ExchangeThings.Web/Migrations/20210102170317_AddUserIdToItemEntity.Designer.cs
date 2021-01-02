@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Wsei.ExchangeThings.Web.Database;
 
 namespace Wsei.ExchangeThings.Web.Migrations
 {
     [DbContext(typeof(ExchangesDbContext))]
-    partial class ExchangesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210102170317_AddUserIdToItemEntity")]
+    partial class AddUserIdToItemEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

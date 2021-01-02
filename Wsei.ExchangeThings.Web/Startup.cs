@@ -1,15 +1,18 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Wsei.ExchangeThings.Web.Auth;
 using Wsei.ExchangeThings.Web.Database;
 using Wsei.ExchangeThings.Web.Filters;
 using Wsei.ExchangeThings.Web.Models;
 using Wsei.ExchangeThings.Web.Models.Validation;
+using Wsei.ExchangeThings.Web.Services;
 
 namespace Wsei.ExchangeThings.Web
 {
@@ -35,7 +38,22 @@ namespace Wsei.ExchangeThings.Web
                 .UseSqlServer(Configuration.GetConnectionString("ExchangeThings"))
             );
 
+            services.AddHttpContextAccessor();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => options.LoginPath = "/auth/login");
+
+            services.AddAuthorization(options => options.AddPolicy(AuthConsts.AuthenticatedScheme, policy =>
+            {
+                policy.AuthenticationSchemes.Add(CookieAuthenticationDefaults.AuthenticationScheme);
+                policy.RequireAuthenticatedUser();
+            }));
+
             services.AddTransient<MyCustomActionFilter>();
+
+            services.AddScoped<IAuthService, AuthService>();
+
+            services.AddTransient<ExchangeItemsRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,6 +68,8 @@ namespace Wsei.ExchangeThings.Web
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseRouting();
 

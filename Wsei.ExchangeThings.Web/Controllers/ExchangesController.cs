@@ -1,24 +1,30 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Wsei.ExchangeThings.Web.Database;
-using Wsei.ExchangeThings.Web.Entities;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Wsei.ExchangeThings.Web.Auth;
 using Wsei.ExchangeThings.Web.Filters;
 using Wsei.ExchangeThings.Web.Models;
+using Wsei.ExchangeThings.Web.Services;
 
 namespace Wsei.ExchangeThings.Web.Controllers
 {
+    [Authorize(AuthConsts.AuthenticatedScheme)]
     public class ExchangesController : Controller
     {
-        private readonly ExchangesDbContext _dbContext;
+        private readonly ExchangeItemsRepository _repository;
 
-        public ExchangesController(ExchangesDbContext dbContext)
+        public ExchangesController(ExchangeItemsRepository repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
 
         [ServiceFilter(typeof(MyCustomActionFilter))]
-        public IActionResult Show(string id)
+        public IActionResult Show(string query)
         {
-            return View();
+            var items = string.IsNullOrEmpty(query)
+                ? _repository.GetAll()
+                : _repository.GetFiltered(query);
+
+            return View(items);
         }
 
         [HttpGet]
@@ -30,15 +36,7 @@ namespace Wsei.ExchangeThings.Web.Controllers
         [HttpPost]
         public IActionResult Add(ItemModel item)
         {
-            var entity = new ItemEntity
-            {
-                Name = item.Name,
-                Description = item.Description,
-                IsVisible = item.IsVisible,
-            };
-
-            _dbContext.Items.Add(entity);
-            _dbContext.SaveChanges();
+            var entity = _repository.Add(item);
 
             return RedirectToAction("AddConfirmation", new { itemId = entity.Id });
         }

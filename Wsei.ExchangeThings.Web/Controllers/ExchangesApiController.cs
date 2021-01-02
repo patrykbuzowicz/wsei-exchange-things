@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Wsei.ExchangeThings.Web.Models;
+using Wsei.ExchangeThings.Web.Services;
 
 namespace Wsei.ExchangeThings.Web.Controllers
 {
@@ -8,6 +9,13 @@ namespace Wsei.ExchangeThings.Web.Controllers
     [Route("api/exchanges")]
     public class ExchangesApiController : ControllerBase
     {
+        private readonly ExchangeItemsRepository _repository;
+
+        public ExchangesApiController(ExchangeItemsRepository repository)
+        {
+            _repository = repository;
+        }
+
         [HttpGet]
         public ActionResult Get()
         {
@@ -23,7 +31,7 @@ namespace Wsei.ExchangeThings.Web.Controllers
         [HttpPost]
         public AddNewItemResponse Post(ItemModel item)
         {
-            // TODO add to database
+            _repository.Add(item);
 
             return new AddNewItemResponse
             {
