@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wsei.ExchangeThings.Web", "Wsei.ExchangeThings.Web\Wsei.ExchangeThings.Web.csproj", "{F060CE3E-323A-4612-BACB-DA9FF119F6C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wsei.ExchangeThings.Web.Tests", "Wsei.ExchangeThings.Web.Tests\Wsei.ExchangeThings.Web.Tests.csproj", "{B71AD676-9A2D-484B-8E7A-F304BC4565F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wsei.ExchangeThings.Web.Tests", "Wsei.ExchangeThings.Web.Tests\Wsei.ExchangeThings.Web.Tests.csproj", "{B71AD676-9A2D-484B-8E7A-F304BC4565F0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaliciousApp", "MaliciousApp\MaliciousApp.csproj", "{766D6AF2-DE41-43EE-96D3-9381F88F01A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B71AD676-9A2D-484B-8E7A-F304BC4565F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B71AD676-9A2D-484B-8E7A-F304BC4565F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B71AD676-9A2D-484B-8E7A-F304BC4565F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{766D6AF2-DE41-43EE-96D3-9381F88F01A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{766D6AF2-DE41-43EE-96D3-9381F88F01A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{766D6AF2-DE41-43EE-96D3-9381F88F01A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{766D6AF2-DE41-43EE-96D3-9381F88F01A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
