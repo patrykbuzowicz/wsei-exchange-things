@@ -45,8 +45,8 @@ namespace Wsei.ExchangeThings.Web
                 .AddCookie(options =>
                 {
                     // just to demonstrate CSRF, bring back old behavior
-                    options.Cookie.SameSite = SameSiteMode.Lax;
-                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                    options.Cookie.SameSite = SameSiteMode.None;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                     // to demonstrate XSS and cookie theft
                     options.Cookie.HttpOnly = false;
                     options.LoginPath = "/auth/login";
