@@ -38,13 +38,19 @@ namespace Wsei.ExchangeThings.Web.Controllers
         {
             var entity = _repository.Add(item);
 
-            return RedirectToAction("AddConfirmation", new { itemId = entity.Id });
+            return RedirectToAction("AddConfirmation", new { itemId = entity.Id, message = $"An item <strong>{item.Name}</strong> was added" });
         }
 
         [HttpGet]
-        public IActionResult AddConfirmation(int itemId)
+        public IActionResult AddConfirmation(int itemId, string message)
         {
-            return View(itemId);
+            var viewModel = new AddNewItemConfirmationViewModel
+            {
+                Id = itemId,
+                Message = message,
+            };
+
+            return View(viewModel);
         }
     }
 }
